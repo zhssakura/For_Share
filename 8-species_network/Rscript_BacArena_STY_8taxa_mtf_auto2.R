@@ -32,6 +32,14 @@ option_list = list(
   optparse::make_option(c("-L", "--lxlycm"),                   type="double",         default=0.01,              help="Number giving the horizontal grid size in cm, defalt: 0.01 cm. For 10000 cells in a 0.01^3 cm3, cell concentrition is 1*10^10 cell/mL, each grid unit is 1 um^2"),
   optparse::make_option(c("-C", "--cconc"),                    type="double",         default=1E+10,             help="Number of cell density in cell/mL, defalt: 1E+10"),
   optparse::make_option(c("-m", "--diameter_um"),              type="double",         default=0.82,              help="Number of cell diameter in um, defalt: 0.82"),
+  optparse::make_option(c("-o1", "--OTU01"),                   type="character",      default='STY_Merged_OTU01_MOM.RDS',           help="The full path leading to the model file in RDS format for OTU01."),
+  optparse::make_option(c("-o2", "--OTU02"),                   type="character",      default='STY_Merged_OTU02.RDS',               help="The full path leading to the model file in RDS format for OTU02."),
+  optparse::make_option(c("-o3", "--OTU03"),                   type="character",      default='STY_Merged_OTU03_MOM.RDS',           help="The full path leading to the model file in RDS format for OTU03."),
+  optparse::make_option(c("-o4", "--OTU04"),                   type="character",      default='STY_Merged_OTU04_MOM.RDS',           help="The full path leading to the model file in RDS format for OTU04."),
+  optparse::make_option(c("-o5", "--OTU05"),                   type="character",      default='STY_Merged_OTU05_MOM.RDS',           help="The full path leading to the model file in RDS format for OTU05."),
+  optparse::make_option(c("-o6", "--OTU06"),                   type="character",      default='STY_Merged_OTU06.RDS',               help="The full path leading to the model file in RDS format for OTU06."),
+  optparse::make_option(c("-o7", "--OTU07"),                   type="character",      default='STY_Merged_OTU07_MOM.RDS',           help="The full path leading to the model file in RDS format for OTU07."),
+  optparse::make_option(c("-o8", "--OTU08"),                   type="character",      default='STY_Merged_OTU08_MgfM.RDS',          help="The full path leading to the model file in RDS format for OTU08."),
   optparse::make_option(c("-t", "--iter"),                     type="double",         default=1,                 help="Number of iteration, defalt:1"));
 
 opt_parser = optparse::OptionParser(option_list=option_list, add_help_option=FALSE);
@@ -55,6 +63,14 @@ photon_con      = opt$photon_con
 ddca_con        = opt$ddca_con
 lxlycm          = opt$lxlycm
 Cconc           = opt$ccon
+OTU01           = opt$OTU01
+OTU02           = opt$OTU02
+OTU03           = opt$OTU03
+OTU04           = opt$OTU04
+OTU05           = opt$OTU05
+OTU06           = opt$OTU06
+OTU07           = opt$OTU07
+OTU08           = opt$OTU08
 diameter_um     = opt$diameter_um
 
 #####################################################################################################################################################################
@@ -73,22 +89,25 @@ simulation_loop <- readRDS(paste(getwd,'/',new_folder,'/BacArena_',otu_name,'_',
 
 dir_gs_models='/srv/scratch/z5265700/Shan_z5095298/z5095298/sponge_modeling/GapSeq_v20210429_STY8taxa_gapseq_v0429_MKSdb_Diet_sw_lALL_b_uncon/'
 
+####### IMPORTANT: The path in the following contents may need to be modified!!!!:
+directory <- getwd()
+directory 
 # OTU1 v20210902:
-STYtaxon_1='/OTU01_renamed/2021-07-01_ReactionPool_to_ObjectModel_use_bio1/07_adapt_addReact_R/04_Rscp/OTU01_MOM_20210825/20210831__OTU01_MOM_20210825__TrainDiet_O2_bothN_no0_sulfite_NoHT/STY_Merged_OTU01_MOM.RDS'
+STYtaxon_1=OTU01
 # OTU2 v20210909 (Photosymbiont use nitrate -> NH3. This was used in 3-taxa co-culture)
-STYtaxon_2='/OTU02_renamed/20210505_diet_sw_no_oxygen_STY_Merged_OTU02-draft__12_NO3/STY_Merged_OTU02.RDS'
+STYtaxon_2=OTU02
 # OTU3 v20210902:
-STYtaxon_3='/OTU03_renamed/2021-07-01_ReactionPool_to_ObjectModel_use_bio1/07_adapt_addReact_R/04_Rscp/OTU03_MOM_20210802hypotau_sulfitetransport_nitritetransport_adh/20210802_diet_sw_STY_Merged_OTU03-MOM_20210802hypotau_sulfitetransport_nitritetransport_adh__12_hypotaurine_nitrite_NoO2_noVB_noNO3/STY_Merged_OTU03_MOM.RDS'
+STYtaxon_3=OTU03
 # OTU4 v20210902:
-STYtaxon_4='/OTU04_renamed/2021-05-11_ReactionPool_to_ObjectModel/07_adapt_addReact_R/04_Rscp/OTU04_MOM_20210825/20210825__OTU04_MOM_20210825__TrainDiet_O2_bothN_no0_sulfite_NoHT/STY_Merged_OTU04_MOM.RDS'
+STYtaxon_4=OTU04
 # OTU5 v20210902:
-STYtaxon_5='/OTU05_renamed/2021-07-01_ReactionPool_to_ObjectModel_use_bio1/07_adapt_addReact_R/04_Rscp/OTU05_MOM_20210813_sulftTrans/20210815_diet_sw_STY_Merged_OTU05-MOM_20210813_sulftTrans__12_SOB_NoHT_O2_bothN_Sulfite_no0/STY_Merged_OTU05_MOM.RDS'
+STYtaxon_5=OTU05
 # OTU6 v20210902:
-STYtaxon_6='/OTU06_renamed/20210515_STY_Merged_OTU06_mineral_sw_3_NoH2S/STY_Merged_OTU06.RDS'
+STYtaxon_6=OTU06
 # OTU7 v20210902:
-STYtaxon_7='/OTU07_renamed/2021-07-01_ReactionPool_to_ObjectModel_use_bio1/07_adapt_addReact_R/04_Rscp/OTU07_MOM_20210813/20210815_diet_sw_STY_Merged_OTU07-MOM_20210813__12_SOB_noHT_O2_bothN_sulfite_no0/STY_Merged_OTU07_MOM.RDS'
+STYtaxon_7=OTU07
 # OTU8 v20210909 (The AOA - NO forming deactivate!! This was used in 3-taxa co-culture):
-STYtaxon_8='/OTU08_renamed_arc/Step_protocals_using_R/07_gf_model/20210515_STY_Merged_OTU08_mineral_sw_3_unlimited_CO2/STY_Merged_OTU08_MgfM/STY_Merged_OTU08_MgfM.RDS'
+STYtaxon_8=OTU08
 
 
 model1 <- readRDS(paste(dir_gs_models,STYtaxon_1,sep = "")) #d__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__UBA10353;f__LS-SOB;g__;s__
