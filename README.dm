@@ -14,8 +14,8 @@
 ####### Command lines of using BacArena to conduct network simulations #######
 
 # To simulate a network of the eight-species microbiome, here is an example using hypotaurine as the sole organic carbon at a concentration of 0.2 mM:
-# IMPORTANT: Path in the following contents may need to be modified:
-# Cmds_for_Rscript_BacArena_8species__simuDiet_optparse_pFBA_ka.sh 
+# IMPORTANT: The full path used in the following contents may need to be modified by the user:
+# ~/Cmds_for_Rscript_BacArena_8species__simuDiet_optparse_pFBA_ka.sh 
 # ~/For_Share/8-species_network/Rscript_BacArena_STY_8taxa_mtf_auto1.R
 # ~/For_Share/8-species_network/Rscript_BacArena_STY_8taxa_mtf_auto2.R
 
